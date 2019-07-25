@@ -60,8 +60,38 @@ public class NVG_test {
 //		Assert.assertTrue(error.getText().equals("Indiquez votre adresse e-mail"));
 //	}
 	
+//	@Test()
+//	public void NVG_3() throws Exception {
+//		By btnLogin = By.xpath("//a[@id='ctl00_Header1_ctlHeaderMetaBar_ucMainLinks_hypMyAnibis']");
+//		By titlepri = By.xpath("//h1[@class='primary-title']");
+//		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
+//		By input_user = By.xpath("//input[@id='ctl00_phlContent_ctlEmailValidationBox_txtEmail']");
+//		By btnSubmit = By.xpath("//a[@id='ctl00_phlContent_ctlEmailValidationBox_lbtContinue']");
+//		By input_pass = By.xpath("//input[@id='ctl00_phlContent_txtPassword']");
+//		By btnLoginSubmit = By.xpath("//span[contains(text(),'Se connecter')]");
+//		By Logoutbtn = By.xpath("//div[@id='ctl00_Header1_ctlHeaderActionBar_ctlMemberNavigation_divLogout']//a");
+//		
+//		driver.findElement(btnLogin).click();
+//		WebElement title = driver.findElement(titlepri);
+//		System.out.println(title.getText());
+//		WebElement username = driver.findElement(input_user);
+//		username.sendKeys("buyer.nvg01@gmail.com");
+//		WebElement Submit = driver.findElement(btnSubmit);
+//		Submit.click();
+//		WebElement password = driver.findElement(input_pass);
+//		password.sendKeys("nvg07072012");
+//		WebElement Loginbtn = driver.findElement(btnLoginSubmit);
+//		Loginbtn.click();
+//		WebDriverWait wait = new WebDriverWait(driver, 60);
+//		WebElement logout = driver.findElement(Logoutbtn);
+//		wait.until(ExpectedConditions.elementToBeClickable(logout));
+//		System.out.println(logout.getText());
+//		Assert.assertTrue(logout.getText().equals("Se déconnecter"));
+//		
+//	}
+	
 	@Test()
-	public void NVG_3() throws Exception {
+	public void NVG_4() throws Exception {
 		By btnLogin = By.xpath("//a[@id='ctl00_Header1_ctlHeaderMetaBar_ucMainLinks_hypMyAnibis']");
 		By titlepri = By.xpath("//h1[@class='primary-title']");
 		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
@@ -89,6 +119,7 @@ public class NVG_test {
 		Assert.assertTrue(logout.getText().equals("Se déconnecter"));
 		
 	}
+	
 	
 	@AfterTest
 	public void tearDownTest() {
