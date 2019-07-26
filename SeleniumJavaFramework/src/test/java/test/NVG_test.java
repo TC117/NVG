@@ -2,8 +2,11 @@ package test;
 
 import pages.NVGLogin;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.poi.ss.formula.functions.Today;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +29,7 @@ public class NVG_test {
 	By titlepri = By.xpath("//h1[@class='primary-title']");
 	By input_user = By.xpath("//input[@id='ctl00_phlContent_ctlEmailValidationBox_txtEmail']");
 	By btnSubmit = By.xpath("//a[@id='ctl00_phlContent_ctlEmailValidationBox_lbtContinue']");
+	By errText = By.xpath("//span[@id='ctl00_phlContent_ctlEmailValidationBox_txtEmail-error']");
 	By input_pass = By.xpath("//input[@id='ctl00_phlContent_txtPassword']");
 	By btnLoginSubmit = By.xpath("//span[contains(text(),'Se connecter')]");
 	By Logoutbtn = By.xpath("//div[@id='ctl00_Header1_ctlHeaderActionBar_ctlMemberNavigation_divLogout']//a");
@@ -40,110 +44,79 @@ public class NVG_test {
 	By Locationtext = By.xpath("//div[@id='ctl00_phlContent_Filter_ctlLocation_ctlLocationAutocomplete_divLocation']");
 	By DistanceDropdown = By.xpath("//select[@id='ctl00_phlContent_Filter_ctlLocation_ddlDistance']");
 	By ApplybtnofLocation = By.xpath("//div[contains(text(),'Où')]//following-sibling::a[@id='ctl00_phlContent_Filter_btnSearch']");
+	By ItemsList = By.xpath("//li[contains(@class,\"list-item listing highlight\")]");
+	By SortDropdown = By.xpath("//select[@id='ctl00_phlContent_ResList_ddlSorting']");
+	By Dateofitem = By.xpath("//li[contains(@class,'item-date')]");
 	
 	@BeforeTest
 	public void setUpTest() {
 		
 		String projectPath = System.getProperty("user.dir");
-		System.setProperty("webdriver.chrome.driver", projectPath+"/drivers/chromedriver/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		
+		System.setProperty("webdriver.chrome.driver", projectPath+"/drivers/chromedriver/chromedriver.exe");		
 	}
 
-//	@Test
-//	public void NVG_1() throws Exception {
-//
-//		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
-//		driver.findElement(btnLogin).click();
-//		WebElement title = driver.findElement(titlepri);
-//		System.out.println(title.getText());
-//		Assert.assertTrue(title.getText().equals("Se connecter / S’inscrire"));
-//	}
+	@Test
+	public void NVG_1() throws Exception {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
+		driver.findElement(btnLogin).click();
+		WebElement title = driver.findElement(titlepri);
+		System.out.println(title.getText());
+		Assert.assertTrue(title.getText().equals("Se connecter / S’inscrire"));
+		driver.close();
+		driver.quit();
+	}
 	
-//	@Test
-//	public void NVG_2() throws Exception {
-//
-//		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
-//		driver.findElement(btnLogin).click();
-//		WebElement title = driver.findElement(titlepri);
-//		System.out.println(title.getText());
-//		WebElement username = driver.findElement(input_user);
-//		username.sendKeys("Some random username");
-//		WebElement Submit = driver.findElement(btnSubmit);
-//		Submit.click();
-//		WebElement error = driver.findElement(errText);
-//		System.out.println(username.getCssValue("border-bottom-color"));
-//		Assert.assertTrue(username.getCssValue("border-bottom-color").equals("rgba(208, 29, 0, 1)"));
-//		Assert.assertTrue(error.getText().equals("Indiquez votre adresse e-mail"));
-//	}
-	
-//	@Test()
-//	public void NVG_3() throws Exception {
-//
-//		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
-//		driver.findElement(btnLogin).click();
-//		WebElement title = driver.findElement(titlepri);
-//		System.out.println(title.getText());
-//		WebElement username = driver.findElement(input_user);
-//		username.sendKeys("buyer.nvg01@gmail.com");
-//		WebElement Submit = driver.findElement(btnSubmit);
-//		Submit.click();
-//		WebElement password = driver.findElement(input_pass);
-//		password.sendKeys("nvg07072012");
-//		WebElement Loginbtn = driver.findElement(btnLoginSubmit);
-//		Loginbtn.click();
-//		WebDriverWait wait = new WebDriverWait(driver, 60);
-//		WebElement logout = driver.findElement(Logoutbtn);
-//		wait.until(ExpectedConditions.elementToBeClickable(logout));
-//		System.out.println(logout.getText());
-//		Assert.assertTrue(logout.getText().equals("Se déconnecter"));
-//		
-//	}
-	
-//	@Test()
-//	public void NVG_4() throws Exception {
-//	
-//		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
-//		driver.findElement(btnLogin).click();
-//		WebElement username = driver.findElement(input_user);
-//		username.sendKeys("buyer.nvg01@gmail.com");
-//		WebElement Submit = driver.findElement(btnSubmit);
-//		Submit.click();
-//		WebElement password = driver.findElement(input_pass);
-//		password.sendKeys("nvg07072012");
-//		WebElement Loginbtn = driver.findElement(btnLoginSubmit);
-//		Loginbtn.click();
-//		WebDriverWait wait = new WebDriverWait(driver, 600);
-//		WebElement logout = driver.findElement(Logoutbtn);
-//		wait.until(ExpectedConditions.elementToBeClickable(logout));
-//		WebElement Search = driver.findElement(Searchbtn);
-//		Search.click();
-//		WebElement Catagory = driver.findElement(Catagorybtn);
-//		Catagory.click();
-//		WebElement Imo = driver.findElement(Immobiliercat);
-//		Imo.click();
-//		WebElement CatApply = driver.findElement(CatApllybtn);
-//		CatApply.click();
-//		WebElement Pricefrom = driver.findElement(PriceFromtext);
-//		WebElement Priceto = driver.findElement(PriceTotext);
-//		Pricefrom.sendKeys("1000");
-//		Priceto.sendKeys("5000");
-//		WebElement Applyforprice = driver.findElement(ApplybtnofPrice);
-//		Applyforprice.click();
-//		WebElement Location = driver.findElement(Locationtext);
-//		wait.until(ExpectedConditions.elementToBeClickable(Location));
-//		Location.click();
-//		Location.sendKeys("Zurich");
-//		Select Distance = new Select (driver.findElement(DistanceDropdown));
-//		Distance.selectByVisibleText("10 km");
-//		WebElement Applyforlocation = driver.findElement(ApplybtnofLocation);
-//		Applyforlocation.click();
-//	}
+	@Test
+	public void NVG_2() throws Exception {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
+		driver.findElement(btnLogin).click();
+		WebElement title = driver.findElement(titlepri);
+		System.out.println(title.getText());
+		WebElement username = driver.findElement(input_user);
+		username.sendKeys("Some random username");
+		WebElement Submit = driver.findElement(btnSubmit);
+		Submit.click();
+		WebElement error = driver.findElement(errText);
+		System.out.println(username.getCssValue("border-bottom-color"));
+		Assert.assertTrue(username.getCssValue("border-bottom-color").equals("rgba(208, 29, 0, 1)"));
+		Assert.assertTrue(error.getText().equals("Indiquez votre adresse e-mail"));
+		driver.close();
+		driver.quit();
+	}
 	
 	@Test()
-	public void NVG_5() throws Exception {
+	public void NVG_3() throws Exception {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
+		driver.findElement(btnLogin).click();
+		WebElement title = driver.findElement(titlepri);
+		System.out.println(title.getText());
+		WebElement username = driver.findElement(input_user);
+		username.sendKeys("buyer.nvg01@gmail.com");
+		WebElement Submit = driver.findElement(btnSubmit);
+		Submit.click();
+		WebElement password = driver.findElement(input_pass);
+		password.sendKeys("nvg07072012");
+		WebElement Loginbtn = driver.findElement(btnLoginSubmit);
+		Loginbtn.click();
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		WebElement logout = driver.findElement(Logoutbtn);
+		wait.until(ExpectedConditions.elementToBeClickable(logout));
+		System.out.println(logout.getText());
+		Assert.assertTrue(logout.getText().equals("Se déconnecter"));
+		driver.close();
+		driver.quit();
+	}
 	
+	@Test()
+	public void NVG_4() throws Exception {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
 		driver.findElement(btnLogin).click();
 		WebElement username = driver.findElement(input_user);
@@ -179,6 +152,112 @@ public class NVG_test {
 		Distance.selectByVisibleText("10 km");
 		WebElement Applyforlocation = driver.findElement(ApplybtnofLocation);
 		Applyforlocation.click();
+		driver.close();
+		driver.quit();
+	}
+	
+	@Test()
+	public void NVG_5() throws Exception {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
+		driver.findElement(btnLogin).click();
+		WebElement username = driver.findElement(input_user);
+		username.sendKeys("buyer.nvg01@gmail.com");
+		WebElement Submit = driver.findElement(btnSubmit);
+		Submit.click();
+		WebElement password = driver.findElement(input_pass);
+		password.sendKeys("nvg07072012");
+		WebElement Loginbtn = driver.findElement(btnLoginSubmit);
+		Loginbtn.click();
+		WebDriverWait wait = new WebDriverWait(driver, 600);
+		WebElement logout = driver.findElement(Logoutbtn);
+		wait.until(ExpectedConditions.elementToBeClickable(logout));
+		WebElement Search = driver.findElement(Searchbtn);
+		Search.click();
+		WebElement Catagory = driver.findElement(Catagorybtn);
+		Catagory.click();
+		WebElement Imo = driver.findElement(Immobiliercat);
+		Imo.click();
+		WebElement CatApply = driver.findElement(CatApllybtn);
+		CatApply.click();
+		WebElement Pricefrom = driver.findElement(PriceFromtext);
+		WebElement Priceto = driver.findElement(PriceTotext);
+		Pricefrom.sendKeys("1000");
+		Priceto.sendKeys("5000");
+		WebElement Applyforprice = driver.findElement(ApplybtnofPrice);
+		Applyforprice.click();
+		WebElement Location = driver.findElement(Locationtext);
+		wait.until(ExpectedConditions.elementToBeClickable(Location));
+		Location.click();
+		Location.sendKeys("Zurich");
+		Select Distance = new Select (driver.findElement(DistanceDropdown));
+		Distance.selectByVisibleText("10 km");
+		WebElement Applyforlocation = driver.findElement(ApplybtnofLocation);
+		Applyforlocation.click();
+		List<WebElement> ListItems = driver.findElements(ItemsList);
+		Assert.assertTrue(ListItems.size() == 20);		
+		driver.close();
+		driver.quit();
+	}
+	
+	@Test()
+	public void NVG_6() throws Exception {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
+		driver.findElement(btnLogin).click();
+		WebElement username = driver.findElement(input_user);
+		username.sendKeys("buyer.nvg01@gmail.com");
+		WebElement Submit = driver.findElement(btnSubmit);
+		Submit.click();
+		WebElement password = driver.findElement(input_pass);
+		password.sendKeys("nvg07072012");
+		WebElement Loginbtn = driver.findElement(btnLoginSubmit);
+		Loginbtn.click();
+		WebDriverWait wait = new WebDriverWait(driver, 600);
+		WebElement logout = driver.findElement(Logoutbtn);
+		wait.until(ExpectedConditions.elementToBeClickable(logout));
+		WebElement Search = driver.findElement(Searchbtn);
+		Search.click();
+		WebElement Catagory = driver.findElement(Catagorybtn);
+		Catagory.click();
+		WebElement Imo = driver.findElement(Immobiliercat);
+		Imo.click();
+		WebElement CatApply = driver.findElement(CatApllybtn);
+		CatApply.click();
+		WebElement Pricefrom = driver.findElement(PriceFromtext);
+		WebElement Priceto = driver.findElement(PriceTotext);
+		Pricefrom.sendKeys("1000");
+		Priceto.sendKeys("5000");
+		WebElement Applyforprice = driver.findElement(ApplybtnofPrice);
+		Applyforprice.click();
+		WebElement Location = driver.findElement(Locationtext);
+		wait.until(ExpectedConditions.elementToBeClickable(Location));
+		Location.click();
+		Location.sendKeys("Zurich");
+		Select Distance = new Select (driver.findElement(DistanceDropdown));
+		Distance.selectByVisibleText("10 km");
+		WebElement Applyforlocation = driver.findElement(ApplybtnofLocation);
+		Applyforlocation.click();
+		Select Sort = new Select(driver.findElement(SortDropdown));
+		Sort.selectByValue("dpo|d");
+		List<WebElement> ListItems = driver.findElements(ItemsList);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+		String datestring1 = "31.12.3000";
+		Date date1 = formatter.parse(datestring1);
+		for (WebElement we : ListItems) {
+			String dateitem = we.findElement(Dateofitem).getText();
+			Date Dateitem = formatter.parse(dateitem);
+			Boolean boo = false;
+			if (Dateitem.compareTo(date1) <= 0) {
+				boo = true;
+			}
+			Assert.assertTrue(boo);
+			date1 = Dateitem; 
+		}	
+		driver.close();
+		driver.quit();
 	}
 	
 	@AfterTest
