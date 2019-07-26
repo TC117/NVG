@@ -40,6 +40,7 @@ public class NVG_test {
 	By Locationtext = By.xpath("//div[@id='ctl00_phlContent_Filter_ctlLocation_ctlLocationAutocomplete_divLocation']");
 	By DistanceDropdown = By.xpath("//select[@id='ctl00_phlContent_Filter_ctlLocation_ddlDistance']");
 	By ApplybtnofLocation = By.xpath("//div[contains(text(),'Où')]//following-sibling::a[@id='ctl00_phlContent_Filter_btnSearch']");
+	
 	@BeforeTest
 	public void setUpTest() {
 		
@@ -100,8 +101,48 @@ public class NVG_test {
 //		
 //	}
 	
+//	@Test()
+//	public void NVG_4() throws Exception {
+//	
+//		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
+//		driver.findElement(btnLogin).click();
+//		WebElement username = driver.findElement(input_user);
+//		username.sendKeys("buyer.nvg01@gmail.com");
+//		WebElement Submit = driver.findElement(btnSubmit);
+//		Submit.click();
+//		WebElement password = driver.findElement(input_pass);
+//		password.sendKeys("nvg07072012");
+//		WebElement Loginbtn = driver.findElement(btnLoginSubmit);
+//		Loginbtn.click();
+//		WebDriverWait wait = new WebDriverWait(driver, 600);
+//		WebElement logout = driver.findElement(Logoutbtn);
+//		wait.until(ExpectedConditions.elementToBeClickable(logout));
+//		WebElement Search = driver.findElement(Searchbtn);
+//		Search.click();
+//		WebElement Catagory = driver.findElement(Catagorybtn);
+//		Catagory.click();
+//		WebElement Imo = driver.findElement(Immobiliercat);
+//		Imo.click();
+//		WebElement CatApply = driver.findElement(CatApllybtn);
+//		CatApply.click();
+//		WebElement Pricefrom = driver.findElement(PriceFromtext);
+//		WebElement Priceto = driver.findElement(PriceTotext);
+//		Pricefrom.sendKeys("1000");
+//		Priceto.sendKeys("5000");
+//		WebElement Applyforprice = driver.findElement(ApplybtnofPrice);
+//		Applyforprice.click();
+//		WebElement Location = driver.findElement(Locationtext);
+//		wait.until(ExpectedConditions.elementToBeClickable(Location));
+//		Location.click();
+//		Location.sendKeys("Zurich");
+//		Select Distance = new Select (driver.findElement(DistanceDropdown));
+//		Distance.selectByVisibleText("10 km");
+//		WebElement Applyforlocation = driver.findElement(ApplybtnofLocation);
+//		Applyforlocation.click();
+//	}
+	
 	@Test()
-	public void NVG_4() throws Exception {
+	public void NVG_5() throws Exception {
 	
 		driver.navigate().to("https://stage.anibis.ch/fr/default.aspx");
 		driver.findElement(btnLogin).click();
@@ -139,7 +180,6 @@ public class NVG_test {
 		WebElement Applyforlocation = driver.findElement(ApplybtnofLocation);
 		Applyforlocation.click();
 	}
-	
 	
 	@AfterTest
 	public void tearDownTest() {
